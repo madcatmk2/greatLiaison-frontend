@@ -1,0 +1,1 @@
+Frontend repository for Great Liaison shopping site
