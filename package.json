@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "greatLiaison-frontend",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Frontend for Great Liaison website",
+  "repository": "https://github.com/madcatmk2/greatLiaison-frontend",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",
