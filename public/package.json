@@ -1,0 +1,14 @@
+{
+  "name": "great-liaison-frontend",
+  "description": "Great Liaison website",
+  "main": "main.js",
+  "dependencies": {
+    "babelify": "^6.3.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "watchify": "^3.4.0"
+  },
+  "scripts": {
+    "start": "watchify main.js -v -t babelify -o app.js"
+  }
+}
