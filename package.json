@@ -1,16 +1,22 @@
 {
   "name": "gll-frontend-server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Server for G&L frontend website",
   "main": "server.js",
   "dependencies": {
+    "babelify": "^6.3.0",
     "body-parser": "^1.4.3",
-    "express": "^4.4.5"
+    "express": "^4.4.5",
+    "jquery":"^2.2.2",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "watchify": "^3.4.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "bundle": "watchify public/main.js -v -t babelify -o public/app.js",
+    "start": "npm run bundle & node server.js"
   },
   "repository": {
     "type": "git",
