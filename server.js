@@ -22,20 +22,24 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/categories/:categoryName', function(req, res) {
-  var CATEGORY_FILE = path.join(__dirname, 'json/categories/' + req.params.categoryName + '.json');
-
-  fs.readFile(CATEGORY_FILE, function(err, data) {
+var getData = function(res, type, fileName) {
+  var DATA_FILE = path.join(__dirname, 'json/' + type + '/' + fileName + '.json');
+  fs.readFile(DATA_FILE, function(err, data) {
     if (err) {
       console.error(err);
-      process.exit(1);
+      res.status(404).send('Not Found');
+    } else {
+      res.json(JSON.parse(data));
     }
-    res.json(JSON.parse(data));
   });
+};
+
+app.get('/api/categories/:categoryName', function(req, res) {
+  getData(res, 'categories', req.params.categoryName);
 });
 
 app.get('/api/products/:productId', function(req, res) {
-  res.json(JSON.parse('{}'));
+  getData(res, 'products', req.params.productId);
 });
 
 // All other GET requests are redirected to the React app
