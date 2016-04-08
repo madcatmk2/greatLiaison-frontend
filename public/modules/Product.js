@@ -1,15 +1,16 @@
 import $ from 'jquery'
 import React from 'react'
+import marked from 'marked'
 
 export default React.createClass({
   getInitialState() {
     return {
-      category: {}
+      product: {}
     }
   },
 
-  loadCategory(newCategory) {
-    var url = '/api/categories/' + (newCategory ? newCategory : this.props.params.categoryName);
+  loadProduct(newProduct) {
+    var url = '/api/products/' + (newProduct ? newProduct : this.props.params.productId);
 
     $.ajax({
       url: url,
@@ -17,8 +18,7 @@ export default React.createClass({
       cache: false,
       success: function(data) {
         this.setState({
-          category: data,
-          categoryName: newCategory
+          product: data
         });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -28,38 +28,38 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    this.loadCategory();
+    this.loadProduct();
   },
 
   componentWillReceiveProps(nextProps) {
-    let newCategory = nextProps.params.categoryName;
+    let newProduct = nextProps.params.productId;
 
-    if (this.state.categoryName != newCategory) {
-      this.loadCategory(newCategory);
+    if (this.state.product._id != newProduct) {
+      this.loadCategory(newProduct);
     }
   },
 
+  loadDescription() {
+    return { __html: this.state.product.description };
+  },
+
   render() {
-    if (!this.state.category.products) {
+    if (!this.state.product) {
       return false;
     }
 
-    var productEntries = this.state.category.products.map(function(product) {
-      return (
-        <li key={product._id} style={{margin: '20px'}}>
-          <img src={"/images/" + product.image} />
-          <span style={{display: "block"}}>{product.name}</span>
-          <span style={{display: "block"}}>{product.size}</span>
-          <span style={{display: "block"}}>{product.origin}製造</span>
-        </li>
-      );
-    });
-
     return (
       <div>
-        <h3>{this.state.category.name}</h3>
+        <img src={"/images/" + this.state.product.image} />
+        <h3>{this.state.product.name}</h3>
+        <h3>{this.state.product.englishName}</h3>
+        <span dangerouslySetInnerHTML={this.loadDescription()} />
         <ul>
-          {productEntries}
+          <li>產品編號: {this.state.product._id}</li>
+          <li>容量: {this.state.product.size}</li>
+          <li>製造地: {this.state.product.origin}</li>
+          <li>價錢: {this.state.product.fullPrice}</li>
+          <li>用法: {this.state.product.instructions}</li>
         </ul>
       </div>
     );

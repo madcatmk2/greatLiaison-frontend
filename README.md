@@ -21,3 +21,19 @@ You can change the port number by setting the `$PORT` environment variable befor
 ```sh
 PORT=3001 npm start
 ```
+
+## API access
+
+The express server provides two API routes to access category listings and product information.
+
+```
+/api/categories/:categoryName
+/api/products/:productId
+```
+
+For example:
+
+```
+/api/categories/cleansing
+/api/products/GL099
+```
