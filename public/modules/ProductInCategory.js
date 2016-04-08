@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 export default React.createClass({
   render() {
@@ -6,8 +7,8 @@ export default React.createClass({
 
     return (
       <li style={{margin: '20px'}}>
-        <img src={"/images/" + image} />
-        <span style={{display: "block"}}>{name}</span>
+        <Link to={"/product/" + _id}><img src={"/images/" + image} /></Link>
+        <Link to={"/product/" + _id}><span style={{display: "block"}}>{name}</span></Link>
         <span style={{display: "block"}}>{size}</span>
         <span style={{display: "block"}}>{origin}製造</span>
       </li>
