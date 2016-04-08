@@ -12,7 +12,14 @@ npm start
 The `npm start` command initializes watchify, which updates the bundled app.js upon any change to
 the source code, before starting the web server. 
 
-Visit <http://localhost:3000/> to get started.
+If running this app on Windows, please run the following two commands in separate windows:
+
+```sh
+npm run bundle
+node server.js
+```
+
+Visit <http://localhost:3000/> once the server is up and the app.js file is generated.
 
 ## Changing the port
 
