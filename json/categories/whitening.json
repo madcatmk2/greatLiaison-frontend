@@ -1,0 +1,33 @@
+{
+  "name": "美白護理系列",
+  "products": [
+    {
+      "_id": "GL078",
+      "image": "GL078.jpg",
+      "name": "高效美白精華素",
+      "size": "20ml",
+      "origin": "法國"
+    },
+    {
+      "_id": "GL077",
+      "image": "GL077.jpg",
+      "name": "高效亮白維生素C 晚霜",
+      "size": "20ml",
+      "origin": "法國"
+    },
+    {
+      "_id": "GL059",
+      "image": "GL059.jpg",
+      "name": "高效美白面膜",
+      "size": "50ml",
+      "origin": "法國"
+    },
+    {
+      "_id": "NL007",
+      "image": "NL007.jpg",
+      "name": "紅參膠原蛋白保濕面膜",
+      "size": "每塊 25ml",
+      "origin": "韓國"
+    }
+  ]
+}

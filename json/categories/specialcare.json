@@ -1,0 +1,19 @@
+{
+  "name": "特別護理系列",
+  "products": [
+    {
+      "_id": "GL085",
+      "image": "GL085.jpg",
+      "name": "去印淨肌修護霜",
+      "size": "5ml x 5支",
+      "origin": "法國"
+    },
+    {
+      "_id": "GL094",
+      "image": "GL094.jpg",
+      "name": "至尊激活無痕霜",
+      "size": "40ml",
+      "origin": "法國"
+    }
+  ]
+}

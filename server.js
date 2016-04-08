@@ -8,8 +8,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
 
-var GLL_PRODUCTS = path.join(__dirname, 'json/gll.json');
-
 app.set('port', (process.env.PORT || 3000));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -24,14 +22,20 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/products', function(req, res) {
-  fs.readFile(GLL_PRODUCTS, function(err, data) {
+app.get('/api/categories/:categoryName', function(req, res) {
+  var CATEGORY_FILE = path.join(__dirname, 'json/categories/' + req.params.categoryName + '.json');
+
+  fs.readFile(CATEGORY_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
     res.json(JSON.parse(data));
   });
+});
+
+app.get('/api/products/:productId', function(req, res) {
+  res.json(JSON.parse('{}'));
 });
 
 // All other GET requests are redirected to the React app

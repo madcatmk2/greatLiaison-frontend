@@ -1,0 +1,40 @@
+{
+  "name": "Glyso-derm系列",
+  "products": [
+    {
+      "_id": "WA046",
+      "image": "WA046.jpg",
+      "name": "佳善護手膏",
+      "size": "50ml",
+      "origin": "加拿大"
+    },
+    {
+      "_id": "WA047",
+      "image": "WA047.jpg",
+      "name": "佳善護手膏",
+      "size": "120ml",
+      "origin": "加拿大"
+    },
+    {
+      "_id": "WA050",
+      "image": "WA050.jpg",
+      "name": "佳善護膚露",
+      "size": "300ml",
+      "origin": "加拿大"
+    },
+    {
+      "_id": "WA045",
+      "image": "WA045.jpg",
+      "name": "佳善維生素E唇膏",
+      "size": "4.5g",
+      "origin": "加拿大"
+    },
+    {
+      "_id": "WA055",
+      "image": "WA055.jpg",
+      "name": "佳善柔潤潔膚乳",
+      "size": "620ml",
+      "origin": "澳洲"
+    }
+  ]
+}
