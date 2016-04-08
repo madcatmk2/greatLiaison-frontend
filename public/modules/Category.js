@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import React from 'react'
+import ProductInCategory from './ProductInCategory'
 
 export default React.createClass({
   getInitialState() {
@@ -45,14 +46,7 @@ export default React.createClass({
     }
 
     var productEntries = this.state.category.products.map(function(product) {
-      return (
-        <li key={product._id} style={{margin: '20px'}}>
-          <img src={"/images/" + product.image} />
-          <span style={{display: "block"}}>{product.name}</span>
-          <span style={{display: "block"}}>{product.size}</span>
-          <span style={{display: "block"}}>{product.origin}製造</span>
-        </li>
-      );
+      return <ProductInCategory key={product._id} product={product} /> ;
     });
 
     return (
