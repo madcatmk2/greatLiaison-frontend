@@ -10,7 +10,7 @@ render((
   <Router history={browserHistory}>
     <Route path="/" component={GllApp}>
       <IndexRoute component={Home}/>
-      <Route path="/category/:categoryName" component={Category}/>
+      <Route path="/category/:categoryId" component={Category}/>
       <Route path="/product/:productId" component={Product}/>
     </Route>
   </Router>

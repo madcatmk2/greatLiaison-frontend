@@ -8,7 +8,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8090));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,14 +33,6 @@ var getData = function(res, type, fileName) {
     }
   });
 };
-
-app.get('/api/categories/:categoryName', function(req, res) {
-  getData(res, 'categories', req.params.categoryName);
-});
-
-app.get('/api/products/:productId', function(req, res) {
-  getData(res, 'products', req.params.productId);
-});
 
 // All other GET requests are redirected to the React app
 app.get('*', function (req, res) {

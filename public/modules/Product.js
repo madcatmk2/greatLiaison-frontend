@@ -9,8 +9,9 @@ export default React.createClass({
     }
   },
 
-  loadProduct(newProduct) {
-    var url = '/api/products/' + (newProduct ? newProduct : this.props.params.productId);
+  loadProduct(newProductId) {
+    var url = 'http://localhost:8080/api/products/'
+      + (newProductId ? newProductId : this.props.params.productId);
 
     $.ajax({
       url: url,
@@ -18,7 +19,7 @@ export default React.createClass({
       cache: false,
       success: function(data) {
         this.setState({
-          product: data
+          product: data.product
         });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -32,10 +33,10 @@ export default React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    let newProduct = nextProps.params.productId;
+    let newProductId = nextProps.params.productId;
 
-    if (this.state.product._id != newProduct) {
-      this.loadCategory(newProduct);
+    if (this.state.product._id != newProductId) {
+      this.loadProduct(newProductId);
     }
   },
 
@@ -50,12 +51,12 @@ export default React.createClass({
 
     return (
       <div>
-        <img src={"/images/" + this.state.product.image} />
+        <img src={"/images/" + this.state.product.sku + ".jpg" } />
         <h3>{this.state.product.name}</h3>
         <h3>{this.state.product.englishName}</h3>
         <span dangerouslySetInnerHTML={this.loadDescription()} />
         <ul>
-          <li>產品編號: {this.state.product._id}</li>
+          <li>產品編號: {this.state.product.sku}</li>
           <li>容量: {this.state.product.size}</li>
           <li>製造地: {this.state.product.origin}</li>
           <li>價錢: {this.state.product.fullPrice}</li>

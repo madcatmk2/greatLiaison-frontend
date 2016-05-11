@@ -5,12 +5,14 @@ import ProductInCategory from './ProductInCategory'
 export default React.createClass({
   getInitialState() {
     return {
-      category: {}
+      category: {},
+      categoryId: ''
     }
   },
 
-  loadCategory(newCategory) {
-    var url = '/api/categories/' + (newCategory ? newCategory : this.props.params.categoryName);
+  loadCategory(newCategoryId) {
+    var url = 'http://localhost:8080/api/products/categories/'
+      + (newCategoryId ? newCategoryId : this.props.params.categoryId);
 
     $.ajax({
       url: url,
@@ -18,8 +20,9 @@ export default React.createClass({
       cache: false,
       success: function(data) {
         this.setState({
-          category: data,
-          categoryName: newCategory
+          products: data.products,
+          categoryId: newCategoryId,
+          categoryName: data.categoryName
         });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -33,19 +36,19 @@ export default React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    let newCategory = nextProps.params.categoryName;
+    let newCategoryId = nextProps.params.categoryId;
 
-    if (this.state.categoryName != newCategory) {
-      this.loadCategory(newCategory);
+    if (this.state.categoryId != newCategoryId) {
+      this.loadCategory(newCategoryId);
     }
   },
 
   render() {
-    if (!this.state.category.products) {
+    if (!this.state.products) {
       return false;
     }
 
-    var productEntries = this.state.category.products.map(function(product) {
+    var productEntries = this.state.products.map(function(product) {
       return <ProductInCategory key={product._id} product={product} /> ;
     });
 

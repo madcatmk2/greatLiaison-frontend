@@ -1,23 +1,55 @@
+import $ from 'jquery'
 import React from 'react'
 import { Link } from 'react-router'
 
 export default React.createClass({
+  getInitialState() {
+    return {
+      categories: [],
+    }
+  },
+
+  loadCategories() {
+    var url = 'http://localhost:8080/api/products/categories';
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({ categories: data.categories });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  componentWillMount() {
+    this.loadCategories();
+  },
+
   render() {
+    if (!this.state.categories) {
+      return false;
+    }
+
+    var categories = this.state.categories.map(function(category) {
+      return (
+        <li key={category.categoryId}>
+          <Link to={"/category/" + category.categoryId}>
+            {category.categoryName}
+          </Link>
+        </li>
+      );
+    });
+
     return (
       <div>
         <h1>G&amp;L 皮膚護理產品系列</h1>
         <ul>
           <li><Link to="/">主頁</Link></li>
-          <li><Link to="/category/cleansing">潔膚系列</Link></li>
-          <li><Link to="/category/toning">鎖水爽膚系列</Link></li>
-          <li><Link to="/category/eyecare">護眼系列</Link></li>
-          <li><Link to="/category/skincare">護膚系列</Link></li>
-          <li><Link to="/category/essence">精華系列</Link></li>
-          <li><Link to="/category/specialcare">特別護理系列</Link></li>
-          <li><Link to="/category/sunblock">防曬系列</Link></li>
-          <li><Link to="/category/whitening">美白護理系列</Link></li>
-          <li><Link to="/category/homme">Homme男士護理系列</Link></li>
-          <li><Link to="/category/glysoderm">Glyso-derm系列</Link></li>
+          {categories}
         </ul>
         <hr/>
       </div>
