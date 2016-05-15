@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import React from 'react'
-import marked from 'marked'
 
 export default React.createClass({
   getInitialState() {
