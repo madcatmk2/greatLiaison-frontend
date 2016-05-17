@@ -2,27 +2,30 @@
   "name": "gll-frontend-server",
   "version": "0.0.1",
   "description": "Server for G&L frontend website",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madcatmk2/greatLiaison-frontend.git"
+  },
   "main": "server.js",
   "dependencies": {
     "babelify": "^6.3.0",
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
-    "jquery":"^2.2.2",
-    "marked":"^0.3.5",
+    "flux": "^2.0.0",
+    "jquery": "^2.2.2",
+    "keymirror": "^0.1.1",
+    "marked": "^0.3.5",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
-    "react-router": "^2.0.0",
+    "react-router": "^2.0.0"
+  },
+  "devDependencies": {
     "watchify": "^3.4.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "watchify public/main.js -v -t babelify -o public/app.js",
+    "bundle": "watchify public/js/app.js -v -t babelify -o public/js/bundle.js",
     "start": "npm run bundle & node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/madcatmk2/greatLiaison-frontend.git"
   },
   "keywords": [
     "great",
@@ -30,7 +33,7 @@
     "g&l"
   ],
   "author": "heymanhn",
-  "engines" : {
-    "node" : "0.12.x"
+  "engines": {
+    "node": "0.12.x"
   }
 }
