@@ -1,4 +1,4 @@
 .DS_Store
 node_modules/
-public/app.js
+public/js/bundle.js
 npm-debug.log

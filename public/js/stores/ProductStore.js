@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var GllAppDispatcher = require('../dispatcher/GllAppDispatcher');
 var GllAPIUtils = require('../utils/GllAPIUtils');
 var ActionTypes = require('../constants/GllAppConstants').ActionTypes;
@@ -9,17 +10,17 @@ var _products = {};
 var _categories = {};
 
 function _addProducts(newProducts) {
-  newProducts.forEach(function(product) {
-    if (!_products[product._id]) {
-      _products[product._id] = product;
+  _.map(newProducts, function(product, id) {
+    if (!_products[id]) {
+      _products[id] = product;
     }
   });
 }
 
 function _addCategories(newCategories) {
-  newCategories.forEach(function(category) {
-    if (!_categories[category.categoryId]) {
-      _categories[category.categoryId] = category;
+  _.map(newCategories, function(category, id) {
+    if (!_categories[id]) {
+      _categories[id] = category;
     }
   });
 }
