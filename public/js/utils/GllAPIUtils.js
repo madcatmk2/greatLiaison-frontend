@@ -1,14 +1,21 @@
 var $ = require('jquery');
+var browserHistory = require('react-router').browserHistory;
 var APIConfig = require('../constants/GllAppConstants').APIConfig;
 var GllProductActionCreators = require('../actions/GllProductActionCreators');
+var GllCartActionCreators = require('../actions/GllCartActionCreators');
 
 function _httpRequest(options, cb) {
   $.ajax({
-    method: options.method,
+    method: options.method || 'GET',
     url: options.url,
+    data: options.data || null,
+    xhrFields: {
+      withCredentials: true
+    },
+    dataType: 'json',
     success: cb,
     error: function(xhr, status, err) {
-      console.error(url, status, err.toString());
+      console.error(options.url, status, err.toString());
     }
   });
 }
@@ -18,8 +25,12 @@ module.exports = {
   initData: function() {
     this.getAllProducts();
     this.getAllCategories();
+    this.getShoppingCart();
   },
 
+  /*
+   * Products & categories
+   */
   getAllProducts: function() {
     var options = {
       method: 'GET',
@@ -40,29 +51,69 @@ module.exports = {
     _httpRequest(options, function(data) {
       GllProductActionCreators.receiveAllCategories(data.categories);
     });
+  },
+
+  /*
+   * Shopping cart
+   */
+  getShoppingCart: function() {
+    var options = {
+      method: 'GET',
+      url: APIConfig.host + '/api/cart'
+    };
+
+    _httpRequest(options, function(data) {
+      GllCartActionCreators.updateCart(data.cart);
+    });
+  },
+
+  addItemToCart: function(item) {
+    var options = {
+      method: 'POST',
+      url: APIConfig.host + '/api/cart',
+      data: item,
+    };
+
+    _httpRequest(options, function(data) {
+      GllCartActionCreators.updateCart(data.cart);
+      browserHistory.push('/cart');
+    });
+  },
+
+  removeItemFromCart: function(item) {
+    var options = {
+      method: 'DELETE',
+      url: APIConfig.host + '/api/cart/' + item.productId
+    };
+
+    _httpRequest(options, function(data) {
+      GllCartActionCreators.updateCart(data.cart);
+    });
+  },
+
+  updateItemInCart: function(item) {
+    var options = {
+      method: 'PUT',
+      url: APIConfig.host + '/api/cart/' + item.productId,
+      data: {
+        quantity: item.quantity
+      }
+    };
+
+    _httpRequest(options, function(data) {
+      GllCartActionCreators.updateCart(data.cart);
+    });
+  },
+
+  removeAllFromCart: function() {
+    var options = {
+      method: 'DELETE',
+      url: APIConfig.host + '/api/cart'
+    };
+
+    _httpRequest(options, function(data) {
+      GllCartActionCreators.updateCart(data.cart);
+    });
   }
-
-  // createMessage: function(message, threadName) {
-  //   // simulate writing to a database
-  //   var rawMessages = JSON.parse(localStorage.getItem('messages'));
-  //   var timestamp = Date.now();
-  //   var id = 'm_' + timestamp;
-  //   var threadID = message.threadID || ('t_' + Date.now());
-  //   var createdMessage = {
-  //     id: id,
-  //     threadID: threadID,
-  //     threadName: threadName,
-  //     authorName: message.authorName,
-  //     text: message.text,
-  //     timestamp: timestamp
-  //   };
-  //   rawMessages.push(createdMessage);
-  //   localStorage.setItem('messages', JSON.stringify(rawMessages));
-
-  //   // simulate success callback
-  //   setTimeout(function() {
-  //     ChatServerActionCreators.receiveCreatedMessage(createdMessage);
-  //   }, 0);
-  // }
 
 };

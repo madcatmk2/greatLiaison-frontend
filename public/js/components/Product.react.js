@@ -1,10 +1,13 @@
-var $ = require('jquery');
+var _ = require('underscore');
 var React = require('react');
+
 var ProductStore = require('../stores/ProductStore');
+var GllAPIUtils = require('../utils/GllAPIUtils');
 
 function getProductFromStore(id) {
   return {
-    product: ProductStore.getProduct(id)
+    product: ProductStore.getProduct(id),
+    quantity: 1
   };
 };
 
@@ -27,9 +30,13 @@ var Product = React.createClass({
       return false;
     }
 
+    var options = _.range(1, 11).map(function(i) {
+      return <option key={i} value={i}>{i}</option>;
+    });
+
     return (
       <div>
-        <img src={"/images/" + this.state.product.sku + ".jpg"} />
+        <img src={'/images/' + this.state.product.sku + '.jpg'} />
         <h3>{this.state.product.name}</h3>
         <h3>{this.state.product.englishName}</h3>
         <span dangerouslySetInnerHTML={this.loadDescription()} />
@@ -40,9 +47,44 @@ var Product = React.createClass({
           <li>價錢: {this.state.product.fullPrice}</li>
           <li>用法: {this.state.product.instructions}</li>
         </ul>
+        <select
+          name='quantity'
+          defaultValue={this.state.quantity}
+          onChange={this._onChangeQuantity}
+        >
+          {options}
+        </select>
+        <div onClick={this._onClickAdd} style={
+          {
+            backgroundColor: '#f90',
+            color: '#fff',
+            cursor: 'hand',
+            width: '100px',
+            height: '30px',
+            marginTop: '10px'
+          }
+        }>
+          加入購物車
+        </div>
       </div>
     );
+  },
+
+
+  /*
+   * Event handlers
+   */
+  _onChangeQuantity: function(event) {
+    this.setState({ quantity: event.target.value });
+  },
+
+  _onClickAdd: function() {
+    GllAPIUtils.addItemToCart({
+      productId: this.props.params.productId,
+      quantity: parseInt(this.state.quantity)
+    });
   }
+
 });
 
 module.exports = Product;

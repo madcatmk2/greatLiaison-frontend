@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var React = require('react');
 var ProductInCategory = require('./ProductInCategory.react');
 var ProductStore = require('../stores/ProductStore');
