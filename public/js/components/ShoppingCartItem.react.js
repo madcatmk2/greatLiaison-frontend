@@ -16,6 +16,21 @@ var ShoppingCartItem = React.createClass({
       return false;
     }
 
+    var wrapLink = function(src) {
+      return (
+        <Link
+          to={"/product/" + this.state.product._id}
+          style={
+            {
+              textDecoration: 'none',
+              color: '#000'
+            }
+          }>
+          {src}
+        </Link>
+      );
+    }.bind(this);
+
     return (
       <div style={
         {
@@ -23,9 +38,9 @@ var ShoppingCartItem = React.createClass({
           margin: '10px'
         }
       } >
-        <img src={'/images/' + this.state.product.sku + '.jpg'} />
-        <h3>{this.state.product.name}</h3>
-        <h4>{this.state.product.englishName}</h4>
+        {wrapLink(<img src={'/images/' + this.state.product.sku + '.jpg'} />)}
+        {wrapLink(<h3>{this.state.product.name}</h3>)}
+        {wrapLink(<h4>{this.state.product.englishName}</h4>)}
         <p>數目:</p>
         <input
           type="text"
