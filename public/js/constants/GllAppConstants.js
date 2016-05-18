@@ -1,4 +1,15 @@
 var keyMirror = require('keymirror');
+var domain, port;
+
+if (process.env.NODE_ENV === 'production') {
+  domain = '108.218.104.23';
+  port = '8082';
+} else {
+  domain = 'localhost';
+  port = '8080';
+}
+
+var host = 'http://' + domain + ':' + port;
 
 module.exports = {
 
@@ -14,7 +25,7 @@ module.exports = {
   }),
 
   APIConfig: {
-    host: 'http://localhost:8080'
+    host: host
   }
 
 };

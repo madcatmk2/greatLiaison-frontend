@@ -27,7 +27,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "watchify public/js/app.js -v -t babelify -o public/js/bundle.js",
-    "start": "npm run bundle & node server.js"
+    "start": "npm run bundle & node server.js",
+    "prod-start": "npm run bundle & NODE_ENV=production node server.js"
   },
   "keywords": [
     "great",
