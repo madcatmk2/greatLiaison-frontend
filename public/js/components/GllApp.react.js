@@ -38,7 +38,8 @@ var GllApp = React.createClass({
         <Header categories={this.state.categories} cart={this.state.cart} />
 
         {this.props.children && React.cloneElement(this.props.children, {
-          categories: this.state.categories
+          categories: this.state.categories,
+          cart: this.state.cart
         })}
 
       </div>

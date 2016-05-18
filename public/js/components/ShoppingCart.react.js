@@ -1,26 +1,11 @@
 var React = require('react');
-var CartStore = require('../stores/CartStore');
 var ShoppingCartItem = require('./ShoppingCartItem.react');
 var GllAPIUtils = require('../utils/GllAPIUtils');
 
-function getStateFromStores() {
-  return {
-    cart: CartStore.getShoppingCart()
-  };
-};
-
 var ShoppingCart = React.createClass({
 
-  getInitialState: function() {
-    return getStateFromStores();
-  },
-
   render: function() {
-    if (!this.state.cart) {
-      return false;
-    }
-
-    var cart = this.state.cart.map(function(item) {
+    var cart = this.props.cart.map(function(item) {
       return <ShoppingCartItem key={item.productId} item={item} /> ;
     });
 
@@ -63,10 +48,6 @@ var ShoppingCart = React.createClass({
   /**
    * Event handler for 'change' events
    */
-  _onChange: function() {
-    this.setState(getStateFromStores());
-  },
-
   _onClickClear: function() {
     GllAPIUtils.removeAllFromCart();
   }
