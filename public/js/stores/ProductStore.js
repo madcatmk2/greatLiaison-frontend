@@ -51,6 +51,10 @@ var ProductStore = assign({}, EventEmitter.prototype, {
     return productsList;
   },
 
+  getAllRawProducts: function() {
+    return _products;
+  },
+
   getAllCategories: function() {
     var categoryList = [];
     for (var id in _categories) {

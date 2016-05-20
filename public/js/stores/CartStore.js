@@ -1,11 +1,13 @@
 var _ = require('underscore');
-var GllAppDispatcher = require('../dispatcher/GllAppDispatcher');
-var GllAPIUtils = require('../utils/GllAPIUtils');
+var assign = require('object-assign');
+
 var ActionTypes = require('../constants/GllAppConstants').ActionTypes;
 var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var CHANGE_EVENT = 'change';
+var GllAppDispatcher = require('../dispatcher/GllAppDispatcher');
+var GllAPIUtils = require('../utils/GllAPIUtils');
+var ProductStore = require('./ProductStore');
 
+var CHANGE_EVENT = 'change';
 var _cart = {};
 
 function _addToCart(newItem) {
@@ -46,6 +48,17 @@ var CartStore = assign({}, EventEmitter.prototype, {
     }
 
     return results;
+  },
+
+  getSubTotal: function() {
+    var products = ProductStore.getAllRawProducts();
+    var subtotal = 0;
+
+    return _.reduce(_cart, function(memo, item) {
+      var price = products[item.productId].fullPrice;
+      var quantity = item.quantity;
+      return memo + (price * quantity);
+    }, 0);
   }
 
 });

@@ -1,6 +1,7 @@
 var React = require('react');
-var ShoppingCartItem = require('./ShoppingCartItem.react');
 var GllAPIUtils = require('../utils/GllAPIUtils');
+var GllAppUtils = require('../utils/GllAppUtils');
+var ShoppingCartItem = require('./ShoppingCartItem.react');
 
 var ShoppingCart = React.createClass({
 
@@ -17,7 +18,10 @@ var ShoppingCart = React.createClass({
       <div>
         <h2>購物車</h2>
         <div>{cart}</div>
-        <div onClick={this.onClickCheckout} style={
+        <div>
+          總數: ${this.props.cartSubTotal}
+        </div>
+        <div onClick={this._onClickCheckout} style={
           {
             backgroundColor: '#0c0',
             color: '#fff',
@@ -48,6 +52,10 @@ var ShoppingCart = React.createClass({
   /**
    * Event handler for 'change' events
    */
+  _onClickCheckout: function() {
+    GllAppUtils.startCheckout();
+  },
+
   _onClickClear: function() {
     GllAPIUtils.removeAllFromCart();
   }
