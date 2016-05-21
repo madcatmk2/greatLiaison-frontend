@@ -34,6 +34,10 @@ var GllApp = React.createClass({
   },
 
   render: function() {
+    if (!this.state.categories || !this.state.cart) {
+      return false;
+    }
+
     return (
       <div>
         <Header categories={this.state.categories} cart={this.state.cart} />

@@ -6,6 +6,7 @@ var Route = reactrouter.Route;
 var browserHistory = reactrouter.browserHistory;
 var IndexRoute = reactrouter.IndexRoute;
 
+var Checkout = require('./components/Checkout.react');
 var GllApp = require('./components/GllApp.react');
 var Home = require('./components/Home.react');
 var Category = require('./components/Category.react');
@@ -18,11 +19,12 @@ GllAPIUtils.initData();
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" component={GllApp}>
+    <Route path='/' component={GllApp}>
       <IndexRoute component={Home}/>
-      <Route path="/category/:categoryId" component={Category}/>
-      <Route path="/product/:productId" component={Product}/>
-      <Route path="/cart" component={ShoppingCart}/>
+      <Route path='category/:categoryId' component={Category}/>
+      <Route path='product/:productId' component={Product}/>
+      <Route path='cart' component={ShoppingCart}/>
+      <Route path='checkout' component={Checkout}/>
     </Route>
   </Router>,
   document.getElementById('app')
