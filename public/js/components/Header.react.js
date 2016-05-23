@@ -23,7 +23,7 @@ var Header = React.createClass({
 
     var cartString = '購物車';
     if (this.props.cart.length > 0) {
-      cartString += '(' + this.props.cart.length + '件物品)';
+      cartString += '(' + this.props.cart.length + '種物品)';
     }
 
     return (

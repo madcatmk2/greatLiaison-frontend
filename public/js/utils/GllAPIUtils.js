@@ -15,6 +15,7 @@ function _httpRequest(options, cb) {
     dataType: 'json',
     success: cb,
     error: function(xhr, status, err) {
+      console.log('Error: ' + xhr.responseText);
       console.error(options.url, status, err.toString());
     }
   });
@@ -114,6 +115,28 @@ module.exports = {
     _httpRequest(options, function(data) {
       GllCartActionCreators.updateCart(data.cart);
     });
+  },
+
+  /*
+   * Checkout process
+   */
+  completeCheckout: function(details) {
+    var options = {
+      method: 'POST',
+      url: APIConfig.host + '/api/orders',
+      data: details,
+    };
+
+    _httpRequest(options, function(data) {
+      if (data) {
+        if (data.redirectURL) {
+          window.location.replace(data.redirectURL);
+        } else {
+          this.getShoppingCart();
+          browserHistory.push('/ordersuccess?orderNumber=' + data.orderNumber);
+        }
+      }
+    }.bind(this));
   }
 
 };

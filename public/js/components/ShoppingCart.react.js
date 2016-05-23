@@ -6,10 +6,6 @@ var ShoppingCartItem = require('./ShoppingCartItem.react');
 var ShoppingCart = React.createClass({
 
   render: function() {
-    if (this.props.cart.length === 0) {
-      return false;
-    }
-
     var cart = this.props.cart.map(function(item) {
       return <ShoppingCartItem key={item.productId} item={item} /> ;
     });

@@ -12,8 +12,7 @@ function getProductStateFromStore() {
 
 function getCartStateFromStore() {
   return {
-    cart: CartStore.getShoppingCart(),
-    cartSubTotal: CartStore.getSubTotal()
+    cart: CartStore.getShoppingCart()
   };
 }
 
@@ -45,7 +44,7 @@ var GllApp = React.createClass({
         {this.props.children && React.cloneElement(this.props.children, {
           categories: this.state.categories,
           cart: this.state.cart,
-          cartSubTotal: this.state.cartSubTotal
+          cartSubTotal: CartStore.getSubTotal()
         })}
 
       </div>

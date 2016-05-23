@@ -7,6 +7,7 @@ var browserHistory = reactrouter.browserHistory;
 var IndexRoute = reactrouter.IndexRoute;
 
 var Checkout = require('./components/Checkout.react');
+var OrderSuccess = require('./components/OrderSuccess.react');
 var GllApp = require('./components/GllApp.react');
 var Home = require('./components/Home.react');
 var Category = require('./components/Category.react');
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route path='product/:productId' component={Product}/>
       <Route path='cart' component={ShoppingCart}/>
       <Route path='checkout' component={Checkout}/>
+      <Route path='ordersuccess' component={OrderSuccess}/>
     </Route>
   </Router>,
   document.getElementById('app')
