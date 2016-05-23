@@ -54,6 +54,10 @@ var CartStore = assign({}, EventEmitter.prototype, {
     var products = ProductStore.getAllRawProducts();
     var subtotal = 0;
 
+    if (_.keys(_cart).length === 0 || _.keys(products).length === 0) {
+      return 0;
+    }
+
     return _.reduce(_cart, function(memo, item) {
       var price = products[item.productId].fullPrice;
       var quantity = item.quantity;
