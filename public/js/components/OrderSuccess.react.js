@@ -1,8 +1,6 @@
 var React = require('react');
 var GllAPIUtils = require('../utils/GllAPIUtils');
 
-// Need to trigger the cart to be cleared
-
 var OrderSuccess = React.createClass({
   componentDidMount: function() {
     GllAPIUtils.getShoppingCart();
