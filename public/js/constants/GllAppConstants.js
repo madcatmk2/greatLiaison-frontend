@@ -14,7 +14,8 @@ module.exports = {
   }),
 
   APIConfig: {
-    host: 'http://localhost:8080'
+    host: process.env.NODE_ENV === 'development' ?
+      'http://localhost:8080' : 'http://108.218.104.23:8080'
   }
 
 };

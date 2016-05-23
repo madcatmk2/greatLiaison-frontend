@@ -22,12 +22,15 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "envify": "^3.4.0",
     "watchify": "^3.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "watchify public/js/app.js -v -t babelify -o public/js/bundle.js",
-    "start": "npm run bundle & node server.js"
+    "bundle-prod": "watchify public/js/app.js -v -t babelify -t [ envify --NODE_ENV production ] -o public/js/bundle.js",
+    "bundle-dev": "watchify public/js/app.js -v -t babelify -t [ envify --NODE_ENV development ] -o public/js/bundle.js",
+    "start": "npm run bundle-dev & node server.js",
+    "prod-start": "npm run bundle-prod & node server.js"
   },
   "keywords": [
     "great",
