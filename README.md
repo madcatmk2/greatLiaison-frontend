@@ -1,6 +1,6 @@
 # G&L Frontend server
 
-This server is used to launch the G&L frontend site and provide stubbed data via an API.
+Welcome to the G&L website, implemented primarily using React and Flux. This server is used only for launching the G&L frontend site. The frontend components communicate directly with the G&L app server via jQuery XHR APIs.
 
 ## To use
 
@@ -12,6 +12,8 @@ npm start
 The `npm start` command initializes watchify, which updates the bundled app.js upon any change to
 the source code, before starting the web server.
 
+If running in a production environment, use `npm run prod-start`, which sets the NODE_ENV to production.
+
 If running this app on Windows, please run the following two commands in separate windows:
 
 ```sh
@@ -19,7 +21,7 @@ npm run bundle
 node server.js
 ```
 
-Visit <http://localhost:8090/> once the server is up and the app.js file is generated.
+Visit <http://localhost:8090/> once the server is up and the bundle.js file is generated.
 
 ## Changing the port
 
@@ -28,7 +30,3 @@ You can change the port number by setting the `$PORT` environment variable befor
 ```sh
 PORT=3001 npm start
 ```
-
-## API access
-
-The express server accesses the backend API (localhost:8080) to access category listings, product information, shopping cart state, and so on.
