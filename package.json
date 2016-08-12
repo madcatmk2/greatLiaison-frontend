@@ -23,14 +23,23 @@
   },
   "devDependencies": {
     "envify": "^3.4.0",
+    "grunt": "^0.4.5",
+    "grunt-apidoc": "^0.11.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-config-dir": "^0.3.2",
+    "grunt-mocha-cli": "^1.14.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "watchify": "^3.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt build",
     "bundle-prod": "watchify public/js/app.js -v -t babelify -t [ envify --NODE_ENV production ] -o public/js/bundle.js",
     "bundle-dev": "watchify public/js/app.js -v -t babelify -t [ envify --NODE_ENV development ] -o public/js/bundle.js",
-    "start": "npm run bundle-dev & node server.js",
-    "prod-start": "npm run bundle-prod & node server.js"
+    "start": "npm run build & npm run bundle-dev & node server.js",
+    "prod-start": "npm run build & npm run bundle-prod & node server.js"
   },
   "keywords": [
     "great",
